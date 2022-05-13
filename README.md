@@ -17,8 +17,9 @@ password for all users is 123456
 
 
 
-run Symfony
+run Symfony server
 
 ```console
 symfony server:start
 ```
+
