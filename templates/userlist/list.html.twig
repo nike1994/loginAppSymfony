@@ -1,0 +1,57 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista użytkowników{% endblock %}
+
+{% block body %}
+
+<h1> Lista użytkowników </h1>
+
+<table class="table" >
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nazwa</th>
+            <th>Aktywne konto</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for user in userList %}
+        <tr name="elements" id="{{ 'user'~ user.id}}">
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>
+                {% if user.active %}
+                    <form action="{{ path('deactivate_user') }}" method="POST">
+                        <button>Aktywny</button>
+                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                    </form>
+                {% else %}
+                    <button> Nieaktywny </button>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</br>
+{% if buttons is defined %}
+
+    {% if buttons == 3 %}
+        <a href="{{ path('app_users_list',{'page':page-10}) }}"><button><-</button></a>
+
+    {% elseif buttons == 2 %}
+        <a href="{{ path('app_users_list',{'page':page-10}) }}"><button><-</button></a>
+        <a href="{{ path('app_users_list',{'page':page+10}) }}"><button>-></button></a>
+
+    {% elseif buttons == 1 %}
+        <a href="{{ path('app_users_list',{'page':page+10}) }}"><button>-></button></a>
+
+    {% elseif buttons == 0 %}
+        
+    {% endif %}
+{% endif %}
+</br>
+<a href="/logout"><button>Wyloguj</button></a>
+
+{% endblock %}
