@@ -26,9 +26,5 @@ class UserChecker implements UserCheckerInterface
         if (!$user instanceof AppUser) {
             return;
         }
-
-        if (!$user->isActive()) {
-            throw new CustomUserMessageAccountStatusException('Twoje konto nie jest aktywne');
-        }
     }
 }
