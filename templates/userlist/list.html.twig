@@ -35,21 +35,19 @@
     </tbody>
 </table>
 </br>
-{% if buttons is defined %}
 
-    {% if buttons == 3 %}
-        <a href="{{ path('app_users_list',{'page':page-10}) }}"><button><-</button></a>
+{% if page > 0 and userList|length < 10 %}
+    <a href="{{ path('app_users_list',{'page':page-10}) }}"><button><-</button></a>
 
-    {% elseif buttons == 2 %}
-        <a href="{{ path('app_users_list',{'page':page-10}) }}"><button><-</button></a>
-        <a href="{{ path('app_users_list',{'page':page+10}) }}"><button>-></button></a>
+{% elseif page > 0 %}
+    <a href="{{ path('app_users_list',{'page':page-10}) }}"><button><-</button></a>
+    <a href="{{ path('app_users_list',{'page':page+10}) }}"><button>-></button></a>
 
-    {% elseif buttons == 1 %}
-        <a href="{{ path('app_users_list',{'page':page+10}) }}"><button>-></button></a>
+{% elseif page == 0 and userList|length == 10 %}
+    <a href="{{ path('app_users_list',{'page':page+10}) }}"><button>-></button></a>
 
-    {% elseif buttons == 0 %}
-        
-    {% endif %}
+{% elseif buttons == 0 %}
+    
 {% endif %}
 </br>
 <a href="/logout"><button>Wyloguj</button></a>

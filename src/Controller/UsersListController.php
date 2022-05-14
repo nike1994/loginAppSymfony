@@ -22,18 +22,8 @@ class UsersListController extends AbstractController
             10,
             $page
         );
-        $button = 0;
-
-        if($page == 0 && count($users)==10){
-            $button =1;
-        }elseif($page>0 && count($users)<10){ //last page
-            $button =3;
-        }elseif($page>0){
-            $button =2; 
-        }
 
         return $this->render('userlist/list.html.twig', [
-            "buttons" => $button,
             "userList"  => $users,
             "page" => $page,
         ]);
